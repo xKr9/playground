@@ -1,0 +1,38 @@
+{
+  "hash": "c0327bfa",
+  "browserHash": "dbdd4db4",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "98489f15",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "814ddee2",
+      "needsInterop": true
+    },
+    "react-bootstrap/Card": {
+      "src": "../../node_modules/react-bootstrap/esm/Card.js",
+      "file": "react-bootstrap_Card.js",
+      "fileHash": "1abb0b2d",
+      "needsInterop": false
+    },
+    "react-bootstrap/Button": {
+      "src": "../../node_modules/react-bootstrap/esm/Button.js",
+      "file": "react-bootstrap_Button.js",
+      "fileHash": "c66000ae",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-NSHX344G": {
+      "file": "chunk-NSHX344G.js"
+    },
+    "chunk-L7APZED3": {
+      "file": "chunk-L7APZED3.js"
+    }
+  }
+}
