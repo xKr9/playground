@@ -1,37 +1,17 @@
-import { Suspense } from "react";
-import { useQuery } from "react-query";
-import { ErrorBoundary } from "react-error-boundary";
-
-const examplePromise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    reject("This is an error");
-  }, 1000);
-});
+import Card from "./components/MultiComponentThing";
 
 function App() {
   return (
     <main className="min-h-screen w-full flex flex-col bg-blue-300 text-white">
-      <ErrorBoundary fallback={<div>Shit</div>}>
-        <Suspense fallback={<div>This is Loading....</div>}>
-          <Example />
-        </Suspense>
-      </ErrorBoundary>
+      <Card>
+        <Card.Title title="Hello"></Card.Title>
+        <Card.Body>
+          <div className="flex justify-center">Some Random Content</div>
+        </Card.Body>
+        <Card.Footer description="Whats up"></Card.Footer>
+      </Card>
     </main>
   );
 }
-
-const Example = () => {
-  const { data } = useQuery({
-    queryKey: "example",
-    queryFn: () => examplePromise,
-    suspense: true,
-    useErrorBoundary: true,
-  });
-  return (
-    <ErrorBoundary fallback={<div>Inner shit</div>}>
-      <h1>{data}</h1>
-    </ErrorBoundary>
-  );
-};
 
 export default App;
