@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { useQuery } from "react-query";
 import { ErrorBoundary } from "react-error-boundary";
 
-const examplePromise = new Promise((resolve, reject) => {
+const examplePromise: Promise<string> = new Promise((resolve, reject) => {
   setTimeout(() => {
     reject("This is an error");
   }, 1000);
