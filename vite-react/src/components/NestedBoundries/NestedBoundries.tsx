@@ -1,7 +1,9 @@
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useQuery } from "react-query";
-import AsyncComponent from "../AsyncComponent";
+import AsyncComponent from "../AsyncComponentsTest/AsyncComponent";
+import { QueryErrorResetBoundary } from "react-query";
+import AsyncComponent2 from "../AsyncComponentsTest/AsyncComponent2";
 
 const AsyncNestedBoundries = () => {
   return (
@@ -32,7 +34,7 @@ const NestedBoundries = () => {
       <h1>
         {data as string} {data ? "from parent" : ""}
       </h1>
-      <div className="w-[200px] bg-blue-500 grid grid-cols-3">
+      <div className="w-[400px] bg-blue-500 grid grid-cols-4">
         <AsyncComponent
           errorFallback={<div className="bg-red-500">Error 1</div>}
           suspenseFallback={<div className="bg-green-500">Loading 1</div>}
@@ -45,12 +47,36 @@ const NestedBoundries = () => {
         >
           <ChildTwo />
         </AsyncComponent>
-        <AsyncComponent
-          errorFallback={<div className="bg-red-500">Error 3</div>}
+
+        {/* <QueryErrorResetBoundary>
+          {({ reset }) => (
+            <ErrorBoundary
+              onReset={reset}
+              fallbackRender={({ resetErrorBoundary }) => (
+                <div className="bg-red-500">
+                  <button onClick={() => resetErrorBoundary()}>Retry</button>
+                </div>
+              )}
+            >
+              <Suspense
+                fallback={<div className="bg-green-500">Loading 3</div>}
+              >
+                <ChildThree />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+        </QueryErrorResetBoundary> */}
+
+        <AsyncComponent2
           suspenseFallback={<div className="bg-green-500">Loading 3</div>}
+          errorFallback={({ error, resetErrorBoundary }) => (
+            <div className="bg-red-500">
+              <button onClick={() => resetErrorBoundary()}>click me</button>
+            </div>
+          )}
         >
           <ChildThree />
-        </AsyncComponent>
+        </AsyncComponent2>
       </div>
     </>
   );
@@ -87,15 +113,19 @@ const ChildTwo = () => {
 };
 
 const ChildThree = () => {
-  const { data } = useQuery({
+  const [flag, setFlag] = React.useState(false);
+  const { data, refetch } = useQuery({
     suspense: true,
-    queryKey: ["test3"],
+    queryKey: ["test3", flag],
     retry: 0,
     queryFn: () =>
       new Promise((resolve, reject) => {
         setTimeout(() => {
-          reject("Resolved 1");
-        }, 7000);
+          const date = new Date();
+          return date.getSeconds() % 2 === 0
+            ? resolve("Resolved 3")
+            : reject("Rejected 3");
+        }, 3000);
       }),
   });
   return <div>{data as string}</div>;
