@@ -1,12 +1,8 @@
 import Main from "./components/AsyncComponentsTest/ComponentsAsProps";
-import { loaderExample } from "./components/MultipleWaysToFetch/LoaderFetch";
 import AsyncNestedBoundries from "./components/NestedBoundries/NestedBoundries";
-import ReturnTypedComponent from "./components/ReturnTypedComponent";
-import Dashboard, { DashboardWrapper } from "./pages/dashboard";
+import { DashboardWrapper } from "./pages/dashboard";
 import { AppProvider } from "./providers/App";
 import { Route, Routes } from "react-router-dom";
-
-type ComponentType = ReturnType<typeof ReturnTypedComponent>;
 
 function App() {
   return (

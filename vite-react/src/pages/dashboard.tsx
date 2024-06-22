@@ -1,4 +1,3 @@
-import { loaderExample } from "@/components/MultipleWaysToFetch/LoaderFetch";
 import { Suspense } from "react";
 import { useQuery } from "react-query";
 

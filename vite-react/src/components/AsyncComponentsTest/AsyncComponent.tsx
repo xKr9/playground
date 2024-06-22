@@ -3,11 +3,8 @@ import { ErrorBoundary } from "react-error-boundary";
 
 type Props = {
   children: React.ReactNode;
-  errorFallback: React.ReactElement<
-    unknown,
-    string | typeof React.Component | React.FunctionComponent<{}>
-  >;
-  suspenseFallback: React.ReactNode;
+  errorFallback?: React.ReactElement<unknown, string | typeof React.Component>;
+  suspenseFallback?: React.ReactNode;
 };
 
 const AsyncComponent = ({
@@ -16,8 +13,16 @@ const AsyncComponent = ({
   suspenseFallback,
 }: Props) => {
   return (
-    <ErrorBoundary fallback={errorFallback}>
-      <React.Suspense fallback={suspenseFallback}>{children}</React.Suspense>
+    <ErrorBoundary
+      fallback={
+        errorFallback ? errorFallback : <div>Something went wrong!</div>
+      }
+    >
+      <React.Suspense
+        fallback={suspenseFallback ? suspenseFallback : <div>Loading...</div>}
+      >
+        {children}
+      </React.Suspense>
     </ErrorBoundary>
   );
 };
