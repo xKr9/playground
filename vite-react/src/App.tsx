@@ -1,4 +1,5 @@
 import Main from "./components/AsyncComponentsTest/ComponentsAsProps";
+import ImperativeHandler from "./components/HooksTest/ImperativeHandler";
 import AsyncNestedBoundries from "./components/NestedBoundries/NestedBoundries";
 import { DashboardWrapper } from "./pages/dashboard";
 import { AppProvider } from "./providers/App";
@@ -12,6 +13,10 @@ function App() {
           <Route path="/" element={<DashboardWrapper />} />
           <Route path="/component-as-props" element={<Main />} />
           <Route path="/nested-boundries" element={<AsyncNestedBoundries />} />
+          <Route
+            path="/hooks/imperative-handle"
+            element={<ImperativeHandler />}
+          />
         </Routes>
       </main>
     </AppProvider>
