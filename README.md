@@ -1,3 +1,3 @@
-# playground
+# Sandbox
 
-Playgorund to fuck around with
+Just a repo to try out random shit in
